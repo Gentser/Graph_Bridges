@@ -1,2 +1,2 @@
 # Graph_Bridges
-Algorithm of searching "bridges" in the graph
+Алгоритм поиска "мостов" в графе на языке Java.
