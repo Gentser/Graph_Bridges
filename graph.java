@@ -24,6 +24,7 @@ public class graph {
 
     }
     private static int V;
+    public int E;
 
     /**
      *
