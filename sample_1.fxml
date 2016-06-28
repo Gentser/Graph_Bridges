@@ -16,19 +16,9 @@
 
 <GridPane alignment="CENTER" blendMode="SRC_OVER" hgap="10.0" prefHeight="489.5" prefWidth="608.9999610351588" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
   <children>
-    <ImageView id="fon" blendMode="SRC_OVER" fitHeight="505.0" fitWidth="609.0" pickOnBounds="true" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0">
-      <image>
-        <Image url="@fon.png" preserveRatio="true" smooth="true" />
-      </image>
-    </ImageView>
     <ImageView id="fon5" fitHeight="490.0" fitWidth="609.0" pickOnBounds="true" visible="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <image>
         <Image url="@fon5.png" preserveRatio="true" smooth="true" />
-      </image>
-    </ImageView>
-    <ImageView id="fon6" fitHeight="510.8125" fitWidth="609.0" pickOnBounds="true" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0">
-      <image>
-        <Image url="@fon6.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
     <VBox minHeight="200.0" prefHeight="419.0" prefWidth="475.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
