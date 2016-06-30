@@ -14,14 +14,14 @@ public class Algorithm {
      Vector<Vector<Integer>> DFS ;//= new Vector<>(G.V);
      Vector<Vector<Integer>> Back ;//= new Vector<>(G.V); // обратные ребра
 
-    public Vector<Vector<Integer>> Order; // массив, в котором указывается порядок включения ребер в Обратные/Прямые ребра
+    public Vector<Vector<Integer>> Order = new Vector<>(/*2*G.E*/); // массив, в котором указывается порядок включения ребер в Обратные/Прямые ребра
     public int Numeration;      // для нумерации ребер в предыдущем массиве
 
     private void incNumeration() { Numeration++;}
 
-    public Vector<Vector<Integer>> getOrder() {
+/*    public Vector<Vector<Integer>> getOrder() {
         return Order;
-    }
+    }*/
 
     public void DFS_bridge(graph G)
     {
@@ -31,7 +31,7 @@ public class Algorithm {
         Vector<Vector<Integer>> DFS = new Vector<>(G.V);
         Vector<Vector<Integer>> Back = new Vector<>(G.V); // обратные ребра
 
-        Vector<Vector<Integer>> Order = new Vector<>(2*G.E); // порядок включения ребер !!!!!!!!!!!!!!!!!
+       // Vector<Vector<Integer>> Order = new Vector<>(2*G.E); // порядок включения ребер !!!!!!!!!!!!!!!!!
 
         Vector<Integer> searched = new Vector<>(G.V); // просмотренные вершины
         Vector<Integer> unsearched = new Vector<>(); // непросмотренные вершины

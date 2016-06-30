@@ -119,15 +119,36 @@ public class Controller {
             LabArr.get(i).setLayoutY(CircArr.get(i).getCenterY() + 3);
 
             Pane1.getChildren().add(LabArr.get(i));
+
         }
 
      // Отрисовка ребер графа
+        boolean FLAGHOK = true;
         for (int end = 0, counter = 0; end < G.V; end ++){
             for (int KUK = 0; KUK < G.gr_.get(end).size(); KUK++)
             {
-                LinArr.add(new Line(CircArr.get(end).getCenterX(),CircArr.get(end).getCenterY(),CircArr.get(G.gr_.get(end).get(KUK)).getCenterX(),CircArr.get(G.gr_.get(end).get(KUK)).getCenterY()));
-                Pane1.getChildren().add(LinArr.get(counter));
-                counter++;
+
+                for (int TRALALA = 0; TRALALA < LinArr.size(); TRALALA++ )
+                {
+                    if ((LinArr.get(TRALALA).getStartX() == CircArr.get(G.gr_.get(end).get(KUK)).getCenterX()) &&
+                    (LinArr.get(TRALALA).getStartY() == CircArr.get(G.gr_.get(end).get(KUK)).getCenterY()) &&
+                            (LinArr.get(TRALALA).getEndX() == CircArr.get(end).getCenterX()) &&
+                            (LinArr.get(TRALALA).getEndY() == CircArr.get(end).getCenterY()))
+                    {
+                        FLAGHOK = false;
+                        break;
+
+                    }
+                }
+
+                if (FLAGHOK)
+                {
+                    LinArr.add(new Line(CircArr.get(end).getCenterX(),CircArr.get(end).getCenterY(),CircArr.get(G.gr_.get(end).get(KUK)).getCenterX(),CircArr.get(G.gr_.get(end).get(KUK)).getCenterY()));
+                    Pane1.getChildren().add(LinArr.get(counter));
+                    // LinArr.add(LinArr.get(counter));
+                    counter++;
+                }
+                FLAGHOK = true;
             }
         }
     }
@@ -139,22 +160,48 @@ public class Controller {
         //counter++;
             for(int j = 0; j < LinArr.size(); j++)
             {
-                if (( LinArr.get(j).getStartX() == CircArr.get(alg.getOrder().get(counter).get(0)).getCenterX() ) &&
-                        (LinArr.get(j).getStartY() == CircArr.get(alg.getOrder().get(counter).get(0)).getCenterY()) &&
-                (LinArr.get(j).getEndX() == CircArr.get(alg.getOrder().get(counter).get(1)).getCenterX()) &&
-                        (LinArr.get(j).getEndY() == CircArr.get(alg.getOrder().get(counter).get(1)).getCenterY()))
+                if ((( LinArr.get(j).getStartX() == CircArr.get(alg.Order.get(counter).get(0)).getCenterX() ) &&
+                        (LinArr.get(j).getStartY() == CircArr.get(alg.Order.get(counter).get(0)).getCenterY()) &&
+                (LinArr.get(j).getEndX() == CircArr.get(alg.Order.get(counter).get(1)).getCenterX()) &&
+                        (LinArr.get(j).getEndY() == CircArr.get(alg.Order.get(counter).get(1)).getCenterY())) ||
+
+                        //или
+                ((( LinArr.get(j).getEndX() == CircArr.get(alg.Order.get(counter).get(0)).getCenterX() ) &&
+                        (LinArr.get(j).getEndY() == CircArr.get(alg.Order.get(counter).get(0)).getCenterY()) &&
+                        (LinArr.get(j).getStartX() == CircArr.get(alg.Order.get(counter).get(1)).getCenterX()) &&
+                        (LinArr.get(j).getStartY() == CircArr.get(alg.Order.get(counter).get(1)).getCenterY()))))
+
                 {
-                    if (alg.getOrder().get(counter).get(2) == 1)
+                    if (alg.Order.get(counter).get(2) == 1)
                     {
-                        LinArr.get(j).setFill(Color.GREEN); //прямое
+                       // Pane1.getChildren().remove(LinArr.get(j));
+                        //LinArr.get(j).setFill(Color.GREEN); //прямое
+                        LinArr.get(j).setStrokeWidth(2);
+
+                        LinArr.get(j).setStroke(Color.GREEN);
+                       // LinArr.get(j).
+
+                       // Pane1.getChildren().add(LinArr.get(j));
                     }
-                    else if (alg.getOrder().get(counter).get(2) == 1)
+                    else if (alg.Order.get(counter).get(2) == 2)
                     {
-                        LinArr.get(j).setFill(Color.INDIGO); //обратное
+                       // Pane1.getChildren().remove(LinArr.get(j));
+                       // LinArr.get(j).setFill(Color.INDIGO); //обратное
+                        LinArr.get(j).setStrokeWidth(2);
+
+                        LinArr.get(j).setStroke(Color.YELLOW);
+                       // Pane1.getChildren().add(LinArr.get(j));
                     }
                     else
                     {
-                        LinArr.get(j).setFill(Color.PEACHPUFF); //мостик
+                       // Pane1.getChildren().remove(LinArr.get(j));
+
+                       // LinArr.get(j).setFill(Color.PEACHPUFF); //мостик
+                        LinArr.get(j).setStrokeWidth(2);
+
+
+                        LinArr.get(j).setStroke(Color.RED);
+                       // Pane1.getChildren().add(LinArr.get(j));
                     }
                 }
 
@@ -167,18 +214,36 @@ public class Controller {
         //counter--;
         for(int j = 0; j < LinArr.size(); j++)
         {
-            if (( LinArr.get(j).getStartX() == CircArr.get(alg.getOrder().get(counter).get(0)).getCenterX() ) &&
-                    (LinArr.get(j).getStartY() == CircArr.get(alg.getOrder().get(counter).get(0)).getCenterY()) &&
-                    (LinArr.get(j).getEndX() == CircArr.get(alg.getOrder().get(counter).get(1)).getCenterX()) &&
-                    (LinArr.get(j).getEndY() == CircArr.get(alg.getOrder().get(counter).get(1)).getCenterY()))
+            if ((( LinArr.get(j).getStartX() == CircArr.get(alg.Order.get(counter).get(0)).getCenterX() ) &&
+                    (LinArr.get(j).getStartY() == CircArr.get(alg.Order.get(counter).get(0)).getCenterY()) &&
+                    (LinArr.get(j).getEndX() == CircArr.get(alg.Order.get(counter).get(1)).getCenterX()) &&
+                    (LinArr.get(j).getEndY() == CircArr.get(alg.Order.get(counter).get(1)).getCenterY())) ||
+
+            //или
+            ((( LinArr.get(j).getEndX() == CircArr.get(alg.Order.get(counter).get(0)).getCenterX() ) &&
+                    (LinArr.get(j).getEndY() == CircArr.get(alg.Order.get(counter).get(0)).getCenterY()) &&
+                    (LinArr.get(j).getStartX() == CircArr.get(alg.Order.get(counter).get(1)).getCenterX()) &&
+                    (LinArr.get(j).getStartY() == CircArr.get(alg.Order.get(counter).get(1)).getCenterY()))))
             {
-                LinArr.get(j).setFill(Color.BLACK); //тип закарсили азазазазазз
+               // Pane1.getChildren().remove(LinArr.get(j));
+              //  LinArr.get(j).setFill(Color.BLACK); //тип закарсили
+                if (LinArr.get(j).getStroke() == Color.RED)
+                {
+                    LinArr.get(j).setStrokeWidth(1);
+                    LinArr.get(j).setStroke(Color.GREEN);
+                }
+                else
+                {
+                    LinArr.get(j).setStrokeWidth(1);
+                    LinArr.get(j).setStroke(Color.BLACK);
+                }
+
             }
         }
     }
 
     public void incCounter() {
-        if (alg.Numeration > counter + 1)
+        if (alg.Numeration > counter + 1 )
         {
             if (Prev_step.isDisable())
             {
@@ -194,7 +259,7 @@ public class Controller {
     }
 
     public void decCounter() {
-        if (counter > 0){
+        if (counter >= 0){
             if(Next_step.isDisable())
             {
                 Next_step.setDisable(false);
