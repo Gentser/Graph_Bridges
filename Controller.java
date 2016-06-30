@@ -105,13 +105,10 @@ public class Controller {
             CircArr.add(new Circle(x1,y1,4,Color.DARKVIOLET));
             LabArr.add(new Label(" " + i));
 
-            Pane1.getChildren().add(CircArr.get(i));
+            
 
             LabArr.get(i).setLayoutX(CircArr.get(i).getCenterX());
             LabArr.get(i).setLayoutY(CircArr.get(i).getCenterY() + 3);
-
-            Pane1.getChildren().add(LabArr.get(i));
-
         }
 
      // Отрисовка ребер графа
@@ -143,11 +140,15 @@ public class Controller {
                 FLAGHOK = true;
             }
         }
+        for (int i =0; i < G.V; i++)
+        {
+            Pane1.getChildren().add(CircArr.get(i));
+            Pane1.getChildren().add(LabArr.get(i));
+        }
     }
 
     public void showRibs(int counter , Algorithm alg) // должен измениться каунтер
     {
-
             for(int j = 0; j < LinArr.size(); j++)
             {
                 if ((( LinArr.get(j).getStartX() == CircArr.get(alg.Order.get(counter).get(0)).getCenterX() ) &&
@@ -179,7 +180,6 @@ public class Controller {
                 }
 
             }
-
     }
 
     public void hideRibs (int counter, Algorithm alg) {
