@@ -45,6 +45,8 @@ public class Controller {
     private Button Next_step;
     @FXML
     private Button Prev_step;
+    @FXML
+    private Slider PIMPSlide;
 
     private ArrayList<Circle> CircArr;// = new ArrayList<>();
     private ArrayList<Label> LabArr;// = new ArrayList<>();
@@ -56,6 +58,7 @@ public class Controller {
     private Algorithm alg;
 
     private int counter = -1;
+    // Деактивируем кнопку "Следующий шаг"
 
 
     public void Generation_kek() {
@@ -65,8 +68,10 @@ public class Controller {
                     error("Выход за пределы дозволенного.");
                 } else {
                     G = new graph(x);
-                    G.E = G.initialisation(x, graph.density.rare);
-                    Messeges.appendText("V = " + G.V + ", E = " + G.E+ "\n" );
+
+                 // Инициализация графа
+                    if(PIMPSlide.getValue() == 0) G.E = G.initialisation(x, graph.density.rare);
+                    else G.E = G.initialisation(x, graph.density.normal);
 
                     paint_GRAPH(G,Circle1);
 
@@ -77,7 +82,32 @@ public class Controller {
                     alg = new Algorithm();
                     alg.DFS_bridge(G);
 
-                    Prev_step.setDisable(true);
+                // Выдача плана прохождения алгоритма нахождения мостов
+                    Messeges.clear();
+                    Messeges.appendText("V = " + G.V + ", E = " + G.E+ "\n" );
+                 //   Messeges.appendText("********************\n");
+                    Messeges.appendText("Порядок отметок прямых/обратных ребер и мостов:\n");
+                    for (int i = 0; i < alg.Order.size(); i++)
+                    {
+                        Messeges.appendText((i+1) + ")  Ребро (" + alg.Order.get(i).get(0) + ", " + alg.Order.get(i).get(1) + ") - ");
+                        switch (alg.Order.get(i).get(2))
+                        {
+                            case (1):
+                                Messeges.appendText("<Прямое>\n");
+                                break;
+                            case (2):
+                                Messeges.appendText("<Обратное>\n");
+                                break;
+                            case (3):
+                                Messeges.appendText("<Мост>\n");
+                                break;
+                        }
+                    }
+                    if (alg.Order.get(alg.Order.size()-1).get(2) != 3)
+                        Messeges.appendText(" В данном графе нет ни одного моста!");
+
+                    // Активируем кнопку "Следующий шаг"
+                    Next_step.setDisable(false);
 
                 }
             } catch (NumberFormatException ex) {

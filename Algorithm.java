@@ -16,6 +16,7 @@ public class Algorithm {
 
     public Vector<Vector<Integer>> Order = new Vector<>(/*2*G.E*/); // массив, в котором указывается порядок включения ребер в Обратные/Прямые ребра
     public int Numeration;      // для нумерации ребер в предыдущем массиве
+    private int Number = 0; // номер для перенумерования вершин в дереве
 
     private void incNumeration() { Numeration++;}
 
@@ -57,8 +58,6 @@ public class Algorithm {
         Numeration = 0;
         //построение DFS-остова
         int iV;//текущая вершина
-
-        int Number = 0; // номер для перенумерования вершин в дереве
 
         int first_vertex = (int)(Math.random()* G.V);
         System.out.println("Корень = " + first_vertex);
@@ -176,7 +175,7 @@ public class Algorithm {
     }
 
 
-   public void DFS_pre(graph G, Vector<Integer> unsearched, Vector<Integer> searched, int iV, int Number,
+   public int DFS_pre(graph G, Vector<Integer> unsearched, Vector<Integer> searched, int iV, int Number,
                        Vector<Integer> NumVert,Vector<Vector<Integer>> DFS,Vector<Vector<Integer>> Back,
                        Vector<Vector<Integer>> P, Vector<Vector<Integer>> Order)
     {
@@ -222,14 +221,13 @@ public class Algorithm {
                 P.get(G.gr_.get(iV).get(j)).add(G.gr_.get(iV).get(j));
                 unsearched.setElementAt(-1,G.gr_.get(iV).get(j));
                 searched.setElementAt(G.gr_.get(iV).get(j),G.gr_.get(iV).get(j));
-                DFS_pre(G, unsearched, searched, G.gr_.get(iV).get(j), Number,NumVert,DFS,Back,P, Order); // рекурсия
+                Number = DFS_pre(G, unsearched, searched, G.gr_.get(iV).get(j), Number,NumVert,DFS,Back,P, Order); // рекурсия
 
             }
 
 
         }
-
-
+        return Number;
     }
 
     boolean back_check(Vector<Vector<Integer>> DFS, int vertex1, int vertex2, boolean check, int step_, Vector<Integer> watched)

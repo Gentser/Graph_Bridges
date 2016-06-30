@@ -49,7 +49,7 @@
                 <Font size="15.0" fx:id="x1" />
               </font>
               <HBox.margin>
-                <Insets left="100.0" />
+                <Insets left="80.0" />
               </HBox.margin>
             </Button>
             <TextField id="amount" fx:id="Amount" blendMode="SRC_OVER" editable="true" maxHeight="210.0" maxWidth="155.0" minHeight="0.0" minWidth="10.0" prefHeight="46.0" prefWidth="146.0" promptText="Введите число вершин" text="">
@@ -57,6 +57,35 @@
                 <Insets left="20.0" fx:id="x2" />
               </HBox.margin>
             </TextField>
+            <VBox prefHeight="51.0" prefWidth="147.0">
+              <children>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                    <Label maxWidth="70.0" minHeight="20.0" minWidth="70.0" prefWidth="70.0" text="Разряженый">
+                      <HBox.margin>
+                        <Insets left="10.0" />
+                      </HBox.margin>
+                    </Label>
+                    <Label text="Плотный">
+                      <HBox.margin>
+                        <Insets left="20.0" top="2.0" />
+                      </HBox.margin>
+                    </Label>
+                  </children>
+                </HBox>
+                <Slider fx:id="PIMPSlide" blendMode="COLOR_BURN" max="1.0" maxWidth="-Infinity" min="0.0" prefWidth="100.0" showTickLabels="false" showTickMarks="false" value="0.0">
+                  <VBox.margin>
+                    <Insets left="30.0" />
+                  </VBox.margin>
+                </Slider>
+              </children>
+              <padding>
+                <Insets fx:id="x3" />
+              </padding>
+              <HBox.margin>
+                <Insets bottom="10.0" />
+              </HBox.margin>
+            </VBox>
           </children>
           <VBox.margin>
             <Insets top="100.0" />
@@ -71,8 +100,8 @@
             </TextArea>
             <VBox prefHeight="152.0" prefWidth="208.99993896484375" HBox.margin="$x2">
               <children>
-                <Button fx:id="Next_step" blendMode="SCREEN" defaultButton="false" font="$x1" mnemonicParsing="false" onAction="#incCounter" prefHeight="30.0" prefWidth="146.0" text="Следующий шаг" textFill="BLACK" />
-                <Button fx:id="Prev_step" blendMode="SCREEN" defaultButton="false" font="$x1" mnemonicParsing="false" onAction="#decCounter" prefHeight="30.0" prefWidth="146.00009999999747" text="Предыдущий шаг" textFill="BLACK" wrapText="false">
+                <Button fx:id="Next_step" blendMode="SCREEN" cancelButton="false" defaultButton="false" disable="true" font="$x1" mnemonicParsing="false" onAction="#incCounter" prefHeight="30.0" prefWidth="146.0" text="Следующий шаг" textFill="BLACK" />
+                <Button fx:id="Prev_step" blendMode="SCREEN" defaultButton="false" disable="true" font="$x1" mnemonicParsing="false" onAction="#decCounter" prefHeight="30.0" prefWidth="146.00009999999747" text="Предыдущий шаг" textFill="BLACK" wrapText="false">
                   <VBox.margin>
                     <Insets top="20.0" />
                   </VBox.margin>
