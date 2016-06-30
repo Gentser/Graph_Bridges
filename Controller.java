@@ -56,7 +56,7 @@ public class Controller {
     public void Generation_kek() {
             try {
                 int x = Integer.parseInt(Amount.getText());
-                if (x > 10 || x < 0) {
+                if (x > 10 || x < 2) {
                     error("Выход за пределы дозволенного.");
                 } else {
                     G = new graph(x);
@@ -71,7 +71,7 @@ public class Controller {
                  // Отработка алгоритма
                     alg = new Algorithm();
                     alg.DFS_bridge(G);
-                    Messeges.appendText("\n Порядок добавления ребер:");
+//                    Messeges.appendText("\n Порядок добавления ребер:");
 //                    for (int i = 0; i < 2*G.E; i++)
 //                    {
 //                        Messeges.appendText("\n(" + alg.Order.get(i).get(0) + ", " +

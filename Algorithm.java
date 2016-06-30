@@ -170,6 +170,11 @@ public class Algorithm {
         show_all(G,NumVert,DFS,Back,P);
         System.out.println("Количество  мостов - " + FOR_RECORD);
 
+        System.out.println("\n  Размер вектора Order = " + Order.size());
+        Order.setSize(G.E + FOR_RECORD);
+        System.out.println("    А теперь = " + Order.size());
+        Order.setSize(Numeration);
+        System.out.println("    А вот прям теперь = " + Order.size());
         // Проверка получившегося массива
         System.out.println("\n Порядок добавления ребер:");
         for (int i = 0; i < Order.size(); i++)  // WARNING Иногда цикл выжодит за область существующих элементов --> ERROR
@@ -282,7 +287,8 @@ public class Algorithm {
             else
             {
                 //if (!binary_search(watched.begin(), watched.end(), j))
-                if (watched.get(j) == j)
+                //if (watched.get(j) == j)
+                if (watched.get(j).equals(j))
                 {
                     //watched.push_back(j);
                     watched.setElementAt(j,j);
@@ -292,7 +298,8 @@ public class Algorithm {
                 //иначе продолжаем цикл
             }
         }
-        return false; //ЭТОГО НЕ БЫЛО !!!
+        return true; //ЭТОГО НЕ БЫЛО !!!//ДОПУСТИМ ТАК РАБОТАЕТ АЗАЗАЗАЗАЗАЗЗА АЗИЗА КЕК СКР СКР ВИРЧУАЛ СЕКС
+
 
     }
 
