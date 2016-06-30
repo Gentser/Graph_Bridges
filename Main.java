@@ -22,8 +22,8 @@ public class Main extends Application {
         primaryStage.setTitle("Алгоритм нахождения мостов в графе");
 
 
-        primaryStage.setScene(new Scene(root, 600, 500));
-        primaryStage.setResizable(true ); //не будет меняться
+        primaryStage.setScene(new Scene(root, 1200, 700));
+        primaryStage.setResizable(false ); //не будет меняться
         primaryStage.show();
 
     }

@@ -65,7 +65,19 @@ public class Controller {
     public void Generation_kek() {
             try {
                 int x = Integer.parseInt(Amount.getText());
-                if (x > 10 || x < 2) {
+                if (x == 228)
+                {
+                    EGG("Один четыре восемь восемь");
+                }
+                else if (x == 1488)
+                {
+                    EGG("Два два восемь");
+                }
+                else if (x == 2016)
+                {
+                    EGG("Графа нет! Но вы держитесь тут, всего вам доброго и хорошего настроения!");
+                }
+               else if (x > 10 || x < 2) {
                     error("Выход за пределы дозволенного.");
                 } else {
                     G = new graph(x);
@@ -144,16 +156,10 @@ public class Controller {
         for (int i =0; i < G.V; i++){
             x1 = R.getRadius()*Math.cos(2*Math.PI/G.V*i) + R.getCenterX();
             y1 = R.getRadius()*Math.sin(2*Math.PI/G.V*i) + R.getCenterY();
-            CircArr.add(new Circle(x1,y1,4,Color.DARKVIOLET));
+            CircArr.add(new Circle(x1,y1,7,Color.DARKVIOLET));
             LabArr.add(new Label(" " + i));
-
-
-
             LabArr.get(i).setLayoutX(CircArr.get(i).getCenterX());
             LabArr.get(i).setLayoutY(CircArr.get(i).getCenterY() + 3);
-
-
-
         }
 
      // Отрисовка ребер графа
@@ -222,19 +228,19 @@ public class Controller {
                             LabDFS.get(INDEX).setVisible(true);
                         }
                         LabDFS.get(++INDEX).setVisible(true);
-                        LinArr.get(j).setStrokeWidth(2);
+                        LinArr.get(j).setStrokeWidth(4);
                         LinArr.get(j).setStroke(Color.GREEN);
                     }
                     else if (alg.Order.get(counter).get(2) == 2)
                     {
                         LabDFS.get(INDEX).setVisible(true);
-                        LinArr.get(j).setStrokeWidth(2);
+                        LinArr.get(j).setStrokeWidth(4);
                         LinArr.get(j).setStroke(Color.YELLOW);
                         //INDEX--;
                     }
                     else
                     {
-                        LinArr.get(j).setStrokeWidth(2);
+                        LinArr.get(j).setStrokeWidth(4);
                         LinArr.get(j).setStroke(Color.RED);
                     }
                 }
@@ -265,7 +271,7 @@ public class Controller {
                 if (LinArr.get(j).getStroke() == Color.RED)
                 {
                     //INDEX--;
-                    LinArr.get(j).setStrokeWidth(2);
+                    LinArr.get(j).setStrokeWidth(4);
                     LinArr.get(j).setStroke(Color.GREEN);
                 }
                 else
@@ -324,6 +330,14 @@ public class Controller {
         Alert alert = new Alert(Alert.AlertType.ERROR);
 
         alert.setTitle("Error Message");
+        alert.setHeaderText(s);
+        alert.showAndWait();
+    }
+
+    public void EGG(String s) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+
+        alert.setTitle("КЕК");
         alert.setHeaderText(s);
         alert.showAndWait();
     }

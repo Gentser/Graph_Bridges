@@ -17,7 +17,7 @@
 
 <GridPane fx:id="Main_stage" alignment="CENTER" blendMode="SRC_OVER" hgap="10.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1200.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
   <children>
-    <ImageView id="fon5" fitHeight="1000.0" fitWidth="1500.0" pickOnBounds="true" visible="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+    <ImageView id="fon5" fitHeight="1020.0" fitWidth="1980.0" pickOnBounds="true" visible="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <image>
         <Image url="@fon5.png" preserveRatio="true" smooth="true" />
       </image>
