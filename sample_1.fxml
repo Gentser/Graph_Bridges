@@ -26,10 +26,10 @@
       <children>
         <Pane fx:id="Pane1" blendMode="HARD_LIGHT" prefHeight="210.0" prefWidth="609.0">
           <children>
-            <Circle id="" fx:id="Circle1" blendMode="MULTIPLY" centerX="650.0" centerY="230.0" fill="WHITE" layoutX="88.0" layoutY="88.0" radius="200.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle id="" fx:id="Circle1" blendMode="MULTIPLY" centerX="600.0" centerY="30.0" fill="WHITE" layoutX="88.0" layoutY="88.0" radius="200.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
           </children>
           <VBox.margin>
-            <Insets fx:id="x3" />
+            <Insets bottom="100.0" />
           </VBox.margin>
         </Pane>
         <HBox alignment="BOTTOM_CENTER" maxWidth="-1.0" minHeight="45.0" padding="$x3" prefHeight="56.0" prefWidth="609.0">
@@ -91,10 +91,10 @@
             </VBox>
           </children>
           <VBox.margin>
-            <Insets top="250.0" />
+            <Insets bottom="20.0" fx:id="x4" />
           </VBox.margin>
         </HBox>
-        <HBox alignment="BOTTOM_CENTER" minHeight="43.0" padding="$x3" prefHeight="110.0" prefWidth="609.0">
+        <HBox alignment="BOTTOM_CENTER" minHeight="43.0" padding="$x3" prefHeight="110.0" prefWidth="609.0" VBox.margin="$x4">
           <children>
             <TextArea fx:id="Messeges" blendMode="SRC_ATOP" disable="false" editable="false" focusTraversable="true" maxHeight="105.0" maxWidth="430.0" minHeight="100.0" opacity="0.8" prefHeight="105.0" prefRowCount="10" prefWidth="430.0" promptText="" style="" text="Область диагноститечских сообщений:&#10;" visible="true" wrapText="false">
               <HBox.margin>
@@ -115,9 +115,6 @@
               </HBox.margin>
             </VBox>
           </children>
-          <VBox.margin>
-            <Insets top="30.0" />
-          </VBox.margin>
         </HBox>
       </children>
     </VBox>
