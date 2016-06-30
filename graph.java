@@ -81,8 +81,6 @@ public class graph {
             }
             if (flag33)
             {
-                //unsearched.erase(unsearched.begin() + INDEX1);
-                //unsearched.erase(remove(unsearched.begin(), unsearched.end(), INDEX1), unsearched.end());
                 unsearched.removeElement(INDEX1);
             }
 
@@ -113,20 +111,17 @@ public class graph {
                 if (unsearched.get(u) == RAND_FOR_CARCASS)
                 {
                     flag4 = true;
-                    //INDEX2 = unsearched[u];
                     INDEX2 = unsearched.get(u);
                 }
             }
             if (flag4)
             {
 
-                //unsearched.erase(remove(unsearched.begin(), unsearched.end(), INDEX2), unsearched.end());
-                //unsearched.erase(unsearched.begin() + INDEX2);
                 unsearched.removeElement(INDEX2);
             }
 
-            b.get(first).removeElement(RAND_FOR_CARCASS);//erase(remove(b[first].begin(), b[first].end(), RAND_FOR_CARCASS), b[first].end());
-            b.get(RAND_FOR_CARCASS).removeElement(first);//erase(remove(b[RAND_FOR_CARCASS].begin(), b[RAND_FOR_CARCASS].end(), first), b[RAND_FOR_CARCASS].end());
+            b.get(first).removeElement(RAND_FOR_CARCASS);
+            b.get(RAND_FOR_CARCASS).removeElement(first);
         }
 
 
@@ -164,21 +159,15 @@ public class graph {
                 }
             }
         }
-        //int E_1 = E;
-
         int rand_vertex = 0;
 
         Vector<Vector<Integer>> b = new Vector<Vector<Integer>> (V);
-       // Vector<Integer> InVec = new Vector<>();
-
-       // b.ensureCapacity(V);
         for (int ink = 0; ink < V; ink++){
             b.add(new Vector<Integer>());
         }
 
         for (int ind = 0; ind < V; ind++)
         {
-            //b[ind].resize(V - 1);
             for (int dni = 0; dni < V ; dni++)
             {
                 if (ind != dni)
@@ -203,10 +192,10 @@ public class graph {
                 rand_vertex = b.get(pnt).get(rand_vertex);
 
                 gr_.get(pnt).add(rand_vertex);
-                b.get(pnt).removeElement(rand_vertex);//erase(remove(b[pnt].begin(), b[pnt].end(), rand_vertex), b[pnt].end()); // вроде правильно
+                b.get(pnt).removeElement(rand_vertex);
 
                 gr_.get(rand_vertex).add(pnt);
-                b.get(rand_vertex).removeElement(pnt);//erase(remove(b[rand_vertex].begin(), b[rand_vertex].end(), pnt), b[rand_vertex].end()); //вроде правильно
+                b.get(rand_vertex).removeElement(pnt);
 
                 balance_v--;
             }

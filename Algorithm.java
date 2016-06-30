@@ -19,10 +19,6 @@ public class Algorithm {
 
     private void incNumeration() { Numeration++;}
 
-/*    public Vector<Vector<Integer>> getOrder() {
-        return Order;
-    }*/
-
     public void DFS_bridge(graph G)
     {
         Vector<Integer> NumVert = new Vector<>(G.V);
@@ -76,11 +72,7 @@ public class Algorithm {
 
         iV = first_vertex;
 
-        //unsearched.erase(remove(unsearched.begin(), unsearched.end(), iV), unsearched.end()); // удаляем из непросмотренных
-        //unsearched.add(iV,-1);//[iV] = -1;
         unsearched.setElementAt(-1,iV);
-        //searched.push_back(iV); // помечаем как просмотренную
-        //searched.add(iV,iV);//[iV] = iV; //проверить
         searched.setElementAt(iV,iV);
 
         DFS_pre(G, unsearched, searched, iV, Number,NumVert,DFS,Back,P, Order);
@@ -107,7 +99,6 @@ public class Algorithm {
         }
         for (int in = 0; in < G.V; in++)
         {
-            //revNum.add(NumVert.get(in),in);//[NumVert[in]] = in;
             revNum.setElementAt(in,NumVert.get(in));
         }
 
@@ -123,8 +114,6 @@ public class Algorithm {
             {
                 find_bridges(pk, pk, watch, count,DFS,Back,P);
             }
-            //watch.push_back(pk);
-           // watch.add(pk,pk);//[pk] = pk;
             watch.setElementAt(pk,pk);
 
             pk = safety;
@@ -136,7 +125,6 @@ public class Algorithm {
         {
             for (int y = 0; y < P.get(u).size(); y++)
             {
-               // P[u][y] = NumVert[P[u][y]];
                 P.get(u).setElementAt(NumVert.get(P.get(u).get(y)),y);
             }
 
@@ -146,8 +134,6 @@ public class Algorithm {
 
         for (int r = 0; r < DFS.size(); r++)
         {
-
-           // Low.add(r,Collections.min(P.get(r))); //Проверить
             Low.setElementAt(Collections.min(P.get(r)),r);
         }
 
@@ -196,8 +182,6 @@ public class Algorithm {
     {
         for (int j = 0; j < G.gr_.get(iV).size(); j++)
         {
-
-            //if (searched[G[iV][j]] == G[iV][j])
             if(searched.get(G.gr_.get(iV).get(j)) == G.gr_.get(iV).get(j)) //проверить на equals
             {
                 boolean kek = false;
@@ -212,7 +196,6 @@ public class Algorithm {
                 {
                     if (back_check(DFS, G.gr_.get(iV).get(j), iV, kek, step_, watched)) // поменял местами вершины в функции
                     {
-                        //Back.get(iV).push_back(G[iV][j]);
                         Back.get(iV).add(G.gr_.get(iV).get(j));
 
                      // Запоминаем порядок включения обратных ребер
@@ -220,14 +203,11 @@ public class Algorithm {
                         Order.get(Numeration).add(G.gr_.get(iV).get(j));
                         Order.get(Numeration).add(2);    // тип ребра: '2' == обратное
                         incNumeration();
-                        //sort(Back[iV].begin(), Back[iV].end()); //для поиска сортируем
                     }
                 }
             }
             else
             {
-                //Sons[iV].push_back(graph[iV][j]);
-              //  DFS[iV].push_back(G[iV][j]); // строим вершину DFS дерева
                 DFS.get(iV).add(G.gr_.get(iV).get(j));
 
              // Запоминаем порядок включения прямых ребер
@@ -238,22 +218,10 @@ public class Algorithm {
                 incNumeration();
 
                 //System.out.print("\n Последний элемент:" + );
-
-                //iV = graph[iV][j];
-                //NumVert.add(G.gr_.get(iV).get(j), ++Number);
                 NumVert.setElementAt(++Number,G.gr_.get(iV).get(j));
-                //NumVert[G[iV][j]] = ++Number; // проверить ++
-
-                //P[G[iV][j]].push_back(G[iV][j]); //сразу без дерева можно только вставить себя самого
                 P.get(G.gr_.get(iV).get(j)).add(G.gr_.get(iV).get(j));
-
-                //unsearched.erase(remove(unsearched.begin(), unsearched.end(), graph[iV][j]), unsearched.end());
-               // unsearched[G[iV][j]] = -1;
                 unsearched.setElementAt(-1,G.gr_.get(iV).get(j));
-                //searched.push_back(graph[iV][j]);
-              //  searched[G[iV][j]] = G[iV][j];
                 searched.setElementAt(G.gr_.get(iV).get(j),G.gr_.get(iV).get(j));
-
                 DFS_pre(G, unsearched, searched, G.gr_.get(iV).get(j), Number,NumVert,DFS,Back,P, Order); // рекурсия
 
             }
@@ -291,19 +259,15 @@ public class Algorithm {
             }
             else
             {
-                //if (!binary_search(watched.begin(), watched.end(), j))
-                //if (watched.get(j) == j)
                 if (watched.get(j).equals(j))
                 {
-                    //watched.push_back(j);
                     watched.setElementAt(j,j);
-                    //sort(watched.begin(), watched.end());
                     back_check(DFS, j, vertex2, check, ++step_, watched); // проверяем дальше
                 }
                 //иначе продолжаем цикл
             }
         }
-        return true; //ЭТОГО НЕ БЫЛО !!!//ДОПУСТИМ ТАК РАБОТАЕТ АЗАЗАЗАЗАЗАЗЗА АЗИЗА КЕК СКР СКР ВИРЧУАЛ СЕКС
+        return true;
 
 
     }
@@ -321,8 +285,6 @@ public class Algorithm {
         {
             System.out.print(j + "-я вершина: ");
             System.out.println(NumVert.get(j) + " ");//опять махинации с пробелом!!
-            //cout << j << "-я вершина: ";
-           // cout << NumVert[j] << ' ' << endl;
         }
         System.out.println(" ");
     }
@@ -369,8 +331,6 @@ public class Algorithm {
         for (int j = 0; j < DFS.get(iV).size(); j++)
         {
             //cout << "Тек вершина " << iV << ", тек номер j " << j << endl;
-
-           // if (DFS[DFS[iV][j]].size() != 0) // если есть древесные ребра из следующей вершины //перемены
             if(DFS.get(DFS.get(iV).get(j)).size() != 0)
             {
 
@@ -381,15 +341,12 @@ public class Algorithm {
             for (int z = 0; z < Back.get(DFS.get(iV).get(j)).size(); z++)
             {
                  // если ведущее обратное ребро попало а просмотренную вершину, вершина в p(v)
-               // if (watch[Back[DFS[iV][j]][z]] == Back[DFS[iV][j]][z])
                 if(watch.get(Back.get(DFS.get(iV).get(j)).get(z)) ==  Back.get(DFS.get(iV).get(j)).get(z)) //equals все дела
                 {
-                    //if (!binary_search(P[FOR_RECORD].begin(), P[FOR_RECORD].end(), Back[DFS[iV][j]][z]))
                     if (!(P.get(FOR_RECORD).contains(Back.get(DFS.get(iV).get(j)).get(z))))
                     {
-                        //P[FOR_RECORD].push_back(Back[DFS[iV][j]][z]); //запихать вершину в которую можно попасть таким способом
+ //запихать вершину в которую можно попасть таким способом
                         P.get(FOR_RECORD).add(Back.get(DFS.get(iV).get(j)).get(z));
-                       // sort(P[FOR_RECORD].begin(), P[FOR_RECORD].end());
                         Collections.sort(P.get(FOR_RECORD));
                     }
 
@@ -403,13 +360,10 @@ public class Algorithm {
         {
             for (int z = 0; z < Back.get(FOR_RECORD).size(); z++)
             {
-                //if (binary_search(watch.begin(), watch.end(), Back[FOR_RECORD][z])) // если ведущее обратное ребро попало а просмотренную вершину, вершина в p(v)
                 if (watch.get(Back.get(FOR_RECORD).get(z)) == Back.get(FOR_RECORD).get(z)) //equals
                 {
-                    //if (!binary_search(P[FOR_RECORD].begin(), P[FOR_RECORD].end(), Back[FOR_RECORD][z]))  // проверить ТУТ
                     if(!(P.get(FOR_RECORD).contains(Back.get(FOR_RECORD).get(z))))
                     {
-                       // P[FOR_RECORD].push_back(Back[FOR_RECORD][z]); //запихать вершину в которую можно попасть таким способом
                         P.get(FOR_RECORD).add(Back.get(FOR_RECORD).get(z));
                     }
 

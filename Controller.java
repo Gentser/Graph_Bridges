@@ -58,14 +58,6 @@ public class Controller {
     private int counter = -1;
 
 
-
-    //....
-    /*Controller(){
-        //LOL = new graph();
-    }*/
-
-
-
     public void Generation_kek() {
             try {
                 int x = Integer.parseInt(Amount.getText());
@@ -145,7 +137,7 @@ public class Controller {
                 {
                     LinArr.add(new Line(CircArr.get(end).getCenterX(),CircArr.get(end).getCenterY(),CircArr.get(G.gr_.get(end).get(KUK)).getCenterX(),CircArr.get(G.gr_.get(end).get(KUK)).getCenterY()));
                     Pane1.getChildren().add(LinArr.get(counter));
-                    // LinArr.add(LinArr.get(counter));
+
                     counter++;
                 }
                 FLAGHOK = true;
@@ -155,9 +147,7 @@ public class Controller {
 
     public void showRibs(int counter , Algorithm alg) // должен измениться каунтер
     {
-/*        for(int i = 0; i < counter; i++)
-        {*/
-        //counter++;
+
             for(int j = 0; j < LinArr.size(); j++)
             {
                 if ((( LinArr.get(j).getStartX() == CircArr.get(alg.Order.get(counter).get(0)).getCenterX() ) &&
@@ -165,7 +155,6 @@ public class Controller {
                 (LinArr.get(j).getEndX() == CircArr.get(alg.Order.get(counter).get(1)).getCenterX()) &&
                         (LinArr.get(j).getEndY() == CircArr.get(alg.Order.get(counter).get(1)).getCenterY())) ||
 
-                        //или
                 ((( LinArr.get(j).getEndX() == CircArr.get(alg.Order.get(counter).get(0)).getCenterX() ) &&
                         (LinArr.get(j).getEndY() == CircArr.get(alg.Order.get(counter).get(0)).getCenterY()) &&
                         (LinArr.get(j).getStartX() == CircArr.get(alg.Order.get(counter).get(1)).getCenterX()) &&
@@ -174,40 +163,23 @@ public class Controller {
                 {
                     if (alg.Order.get(counter).get(2) == 1)
                     {
-                       // Pane1.getChildren().remove(LinArr.get(j));
-                        //LinArr.get(j).setFill(Color.GREEN); //прямое
                         LinArr.get(j).setStrokeWidth(2);
-
                         LinArr.get(j).setStroke(Color.GREEN);
-                       // LinArr.get(j).
-
-                       // Pane1.getChildren().add(LinArr.get(j));
                     }
                     else if (alg.Order.get(counter).get(2) == 2)
                     {
-                       // Pane1.getChildren().remove(LinArr.get(j));
-                       // LinArr.get(j).setFill(Color.INDIGO); //обратное
                         LinArr.get(j).setStrokeWidth(2);
-
                         LinArr.get(j).setStroke(Color.YELLOW);
-                       // Pane1.getChildren().add(LinArr.get(j));
                     }
                     else
                     {
-                       // Pane1.getChildren().remove(LinArr.get(j));
-
-                       // LinArr.get(j).setFill(Color.PEACHPUFF); //мостик
                         LinArr.get(j).setStrokeWidth(2);
-
-
                         LinArr.get(j).setStroke(Color.RED);
-                       // Pane1.getChildren().add(LinArr.get(j));
                     }
                 }
 
             }
 
-        //прячем предыдущее ребро
     }
 
     public void hideRibs (int counter, Algorithm alg) {
@@ -219,17 +191,14 @@ public class Controller {
                     (LinArr.get(j).getEndX() == CircArr.get(alg.Order.get(counter).get(1)).getCenterX()) &&
                     (LinArr.get(j).getEndY() == CircArr.get(alg.Order.get(counter).get(1)).getCenterY())) ||
 
-            //или
             ((( LinArr.get(j).getEndX() == CircArr.get(alg.Order.get(counter).get(0)).getCenterX() ) &&
                     (LinArr.get(j).getEndY() == CircArr.get(alg.Order.get(counter).get(0)).getCenterY()) &&
                     (LinArr.get(j).getStartX() == CircArr.get(alg.Order.get(counter).get(1)).getCenterX()) &&
                     (LinArr.get(j).getStartY() == CircArr.get(alg.Order.get(counter).get(1)).getCenterY()))))
             {
-               // Pane1.getChildren().remove(LinArr.get(j));
-              //  LinArr.get(j).setFill(Color.BLACK); //тип закарсили
                 if (LinArr.get(j).getStroke() == Color.RED)
                 {
-                    LinArr.get(j).setStrokeWidth(1);
+                    LinArr.get(j).setStrokeWidth(2);
                     LinArr.get(j).setStroke(Color.GREEN);
                 }
                 else
@@ -243,34 +212,33 @@ public class Controller {
     }
 
     public void incCounter() {
-        if (alg.Numeration > counter + 1 )
-        {
-            if (Prev_step.isDisable())
-            {
-                Prev_step.setDisable(false);
-            }
-            counter ++;
-            showRibs(counter, alg);
+        if (alg.Numeration > counter + 1 ) {
+
+                if (Prev_step.isDisable()) {
+                    Prev_step.setDisable(false);
+                }
+                    counter++;
+                    showRibs(counter, alg);
+                    if (alg.Numeration <= counter + 1)
+                    {
+                        Next_step.setDisable(true);
+                    }
+                }
         }
-        else
-        {
-            Next_step.setDisable(true);
-        }
-    }
 
     public void decCounter() {
-        if (counter >= 0){
-            if(Next_step.isDisable())
-            {
+        if (counter >= 0) {
+            if (Next_step.isDisable()) {
                 Next_step.setDisable(false);
             }
 
             hideRibs(counter, alg);
-            counter --;
-        }
-        else
-        {
-            Prev_step.setDisable(true);
+            counter--;
+
+            if (counter == -1) {
+                Prev_step.setDisable(true);
+            }
+
         }
     }
 
