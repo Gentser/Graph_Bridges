@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:id="Main_stage" alignment="CENTER" blendMode="SRC_OVER" hgap="10.0" prefHeight="489.5" prefWidth="608.9999610351588" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
+  <children>
+    <ImageView id="fon5" fitHeight="1000.0" fitWidth="1500.0" pickOnBounds="true" visible="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <image>
+        <Image url="@fon5.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <VBox id="" fx:id="virtual_sex_SMS" alignment="TOP_CENTER" minHeight="200.0" prefHeight="490.0" prefWidth="609.0001220703125" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <children>
+        <Pane fx:id="Pane1" blendMode="HARD_LIGHT" prefHeight="210.0" prefWidth="609.0">
+          <children>
+            <Circle id="" fx:id="Circle1" blendMode="MULTIPLY" centerX="304.5" centerY="140.0" fill="WHITE" radius="112.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+          </children>
+          <VBox.margin>
+            <Insets fx:id="x3" />
+          </VBox.margin>
+        </Pane>
+        <HBox alignment="BOTTOM_CENTER" maxWidth="-1.0" minHeight="45.0" padding="$x3" prefHeight="56.0" prefWidth="609.0">
+          <children>
+            <Button fx:id="Generation" blendMode="HARD_LIGHT" cache="false" cacheHint="DEFAULT" cancelButton="false" defaultButton="false" depthTest="INHERIT" maxHeight="100.0" mnemonicParsing="false" onAction="#Generation_kek" opacity="1.0" prefHeight="41.0" prefWidth="146.0" text="Генерация графа" textAlignment="LEFT" textFill="BLACK" textOverrun="ELLIPSIS" wrapText="false">
+              <effect>
+                <Lighting diffuseConstant="2.0" specularConstant="0.0" specularExponent="40.0" surfaceScale="0.0">
+                  <bumpInput>
+                    <Shadow />
+                  </bumpInput>
+                  <light>
+                    <javafx.scene.effect.Light.Spot pointsAtZ="-100.0" x="100.0" y="100.0" z="100.0" />
+                  </light>
+                </Lighting>
+              </effect>
+              <font>
+                <Font size="15.0" fx:id="x1" />
+              </font>
+              <HBox.margin>
+                <Insets left="80.0" />
+              </HBox.margin>
+            </Button>
+            <TextField id="amount" fx:id="Amount" blendMode="SRC_OVER" editable="true" maxHeight="210.0" maxWidth="155.0" minHeight="0.0" minWidth="10.0" prefHeight="46.0" prefWidth="146.0" promptText="Введите число вершин" text="">
+              <HBox.margin>
+                <Insets left="20.0" fx:id="x2" />
+              </HBox.margin>
+            </TextField>
+            <VBox prefHeight="51.0" prefWidth="147.0">
+              <children>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                    <Label maxWidth="70.0" minHeight="20.0" minWidth="70.0" prefWidth="70.0" text="Разряженый">
+                      <HBox.margin>
+                        <Insets left="10.0" />
+                      </HBox.margin>
+                    </Label>
+                    <Label text="Плотный">
+                      <HBox.margin>
+                        <Insets left="20.0" top="2.0" />
+                      </HBox.margin>
+                    </Label>
+                  </children>
+                </HBox>
+                <Slider fx:id="PIMPSlide" blendMode="COLOR_BURN" max="1.0" maxWidth="-Infinity" min="0.0" prefWidth="100.0" showTickLabels="false" showTickMarks="false" value="0.0">
+                  <VBox.margin>
+                    <Insets left="30.0" />
+                  </VBox.margin>
+                </Slider>
+              </children>
+              <padding>
+                <Insets fx:id="x3" />
+              </padding>
+              <HBox.margin>
+                <Insets bottom="10.0" />
+              </HBox.margin>
+            </VBox>
+          </children>
+          <VBox.margin>
+            <Insets top="100.0" />
+          </VBox.margin>
+        </HBox>
+        <HBox alignment="BOTTOM_CENTER" minHeight="43.0" padding="$x3" prefHeight="110.0" prefWidth="609.0">
+          <children>
+            <TextArea fx:id="Messeges" blendMode="SRC_ATOP" disable="false" editable="false" focusTraversable="true" maxHeight="105.0" maxWidth="430.0" minHeight="45.0" opacity="0.8" prefHeight="105.0" prefRowCount="10" prefWidth="430.0" promptText="" style="" text="Область диагноститечских сообщений:&#10;" visible="true" wrapText="false">
+              <HBox.margin>
+                <Insets bottom="25.0" left="20.0" />
+              </HBox.margin>
+            </TextArea>
+            <VBox prefHeight="152.0" prefWidth="208.99993896484375" HBox.margin="$x2">
+              <children>
+                <Button fx:id="Next_step" blendMode="SCREEN" cancelButton="false" defaultButton="false" disable="true" font="$x1" mnemonicParsing="false" onAction="#incCounter" prefHeight="30.0" prefWidth="146.0" text="Следующий шаг" textFill="BLACK" />
+                <Button fx:id="Prev_step" blendMode="SCREEN" defaultButton="false" disable="true" font="$x1" mnemonicParsing="false" onAction="#decCounter" prefHeight="30.0" prefWidth="146.00009999999747" text="Предыдущий шаг" textFill="BLACK" wrapText="false">
+                  <VBox.margin>
+                    <Insets top="20.0" />
+                  </VBox.margin>
+                </Button>
+              </children>
+            </VBox>
+          </children>
+          <VBox.margin>
+            <Insets top="30.0" />
+          </VBox.margin>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>
