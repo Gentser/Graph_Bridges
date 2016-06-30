@@ -14,6 +14,12 @@ public class Algorithm {
      Vector<Vector<Integer>> DFS ;//= new Vector<>(G.V);
      Vector<Vector<Integer>> Back ;//= new Vector<>(G.V); // обратные ребра
 
+    public Vector<Vector<Integer>> Order = new Vector<>(/*2*G.E*/); // массив, в котором указывается порядок включения ребер в Обратные/Прямые ребра
+    public int Numeration;      // для нумерации ребер в предыдущем массиве
+    private int Number = 0; // номер для перенумерования вершин в дереве
+
+    private void incNumeration() { Numeration++;}
+
     public void DFS_bridge(graph G)
     {
         Vector<Integer> NumVert = new Vector<>(G.V);
@@ -21,8 +27,12 @@ public class Algorithm {
         Vector<Vector<Integer>> P = new Vector<>(G.V);
         Vector<Vector<Integer>> DFS = new Vector<>(G.V);
         Vector<Vector<Integer>> Back = new Vector<>(G.V); // обратные ребра
+
+       // Vector<Vector<Integer>> Order = new Vector<>(2*G.E); // порядок включения ребер !!!!!!!!!!!!!!!!!
+
         Vector<Integer> searched = new Vector<>(G.V); // просмотренные вершины
-        Vector<Integer> unsearched = new Vector<>();; // непросмотренные вершины
+        Vector<Integer> unsearched = new Vector<>(); // непросмотренные вершины
+
         for (int k = 0; k < G.V; k++)
         {
             unsearched.add(k); //посмотреть
@@ -32,12 +42,22 @@ public class Algorithm {
             P.add(new Vector<>());
             NumVert.add(-1);
             Low.add(-1);
-
         }
+        System.out.println("***Размерность основного массива Order = " + 2*G.E + "***");
+        for (int k = 0; k < 2*G.E; k++)
+        {
+            /*
+             первый и второй элемент - вершины ребра, \
+             3-ий элемент - идентификатор:
+             '0' - мост;
+             '1' - прямое ребро;
+             '2' - обратное ребро;
+             */
+            Order.add(new Vector<>());
+        }
+        Numeration = 0;
         //построение DFS-остова
         int iV;//текущая вершина
-
-        int Number = 0; // номер для перенумерования вершин в дереве
 
         int first_vertex = (int)(Math.random()* G.V);
         System.out.println("Корень = " + first_vertex);
@@ -51,14 +71,10 @@ public class Algorithm {
 
         iV = first_vertex;
 
-        //unsearched.erase(remove(unsearched.begin(), unsearched.end(), iV), unsearched.end()); // удаляем из непросмотренных
-        //unsearched.add(iV,-1);//[iV] = -1;
         unsearched.setElementAt(-1,iV);
-        //searched.push_back(iV); // помечаем как просмотренную
-        //searched.add(iV,iV);//[iV] = iV; //проверить
         searched.setElementAt(iV,iV);
 
-        DFS_pre(G, unsearched, searched, iV, Number,NumVert,DFS,Back,P);
+        DFS_pre(G, unsearched, searched, iV, Number,NumVert,DFS,Back,P, Order);
 
 
         Vector<Integer> watch = new Vector<>(G.V);
@@ -82,7 +98,6 @@ public class Algorithm {
         }
         for (int in = 0; in < G.V; in++)
         {
-            //revNum.add(NumVert.get(in),in);//[NumVert[in]] = in;
             revNum.setElementAt(in,NumVert.get(in));
         }
 
@@ -98,8 +113,6 @@ public class Algorithm {
             {
                 find_bridges(pk, pk, watch, count,DFS,Back,P);
             }
-            //watch.push_back(pk);
-           // watch.add(pk,pk);//[pk] = pk;
             watch.setElementAt(pk,pk);
 
             pk = safety;
@@ -111,7 +124,6 @@ public class Algorithm {
         {
             for (int y = 0; y < P.get(u).size(); y++)
             {
-               // P[u][y] = NumVert[P[u][y]];
                 P.get(u).setElementAt(NumVert.get(P.get(u).get(y)),y);
             }
 
@@ -121,8 +133,6 @@ public class Algorithm {
 
         for (int r = 0; r < DFS.size(); r++)
         {
-
-           // Low.add(r,Collections.min(P.get(r))); //Проверить
             Low.setElementAt(Collections.min(P.get(r)),r);
         }
 
@@ -137,20 +147,40 @@ public class Algorithm {
 
                     System.out.println(fin + " - " + DFS.get(fin).get(infin));
                     FOR_RECORD++;
+
+                 // Запоминаем порядок включения мостов
+                    Order.get(Numeration).add(0, fin);
+                    Order.get(Numeration).add(1, DFS.get(fin).get(infin));
+                    Order.get(Numeration).add(2, 3);    // тип ребра: '2' == обратное
+                    incNumeration();
                 }
             }
         }
         show_all(G,NumVert,DFS,Back,P);
         System.out.println("Количество  мостов - " + FOR_RECORD);
+
+        System.out.println("\n  Размер вектора Order = " + Order.size());
+        Order.setSize(G.E + FOR_RECORD);
+        System.out.println("    А теперь = " + Order.size());
+        Order.setSize(Numeration);
+        System.out.println("    А вот прям теперь = " + Order.size());
+        // Проверка получившегося массива
+        System.out.println("\n Порядок добавления ребер:");
+        for (int i = 0; i < Order.size(); i++)  // WARNING Иногда цикл выжодит за область существующих элементов --> ERROR
+        {
+            System.out.println("\n(" + Order.get(i).get(0) + ", " +
+                     Order.get(i).get(1) + ", " + Order.get(i).get(2) + ") ");
+        }
+
     }
 
 
-   public void DFS_pre(graph G, Vector<Integer> unsearched, Vector<Integer> searched, int iV, int Number, Vector<Integer> NumVert,Vector<Vector<Integer>> DFS,Vector<Vector<Integer>> Back,Vector<Vector<Integer>> P)
+   public int DFS_pre(graph G, Vector<Integer> unsearched, Vector<Integer> searched, int iV, int Number,
+                       Vector<Integer> NumVert,Vector<Vector<Integer>> DFS,Vector<Vector<Integer>> Back,
+                       Vector<Vector<Integer>> P, Vector<Vector<Integer>> Order)
     {
         for (int j = 0; j < G.gr_.get(iV).size(); j++)
         {
-
-            //if (searched[G[iV][j]] == G[iV][j])
             if(searched.get(G.gr_.get(iV).get(j)) == G.gr_.get(iV).get(j)) //проверить на equals
             {
                 boolean kek = false;
@@ -165,41 +195,39 @@ public class Algorithm {
                 {
                     if (back_check(DFS, G.gr_.get(iV).get(j), iV, kek, step_, watched)) // поменял местами вершины в функции
                     {
-                        //Back.get(iV).push_back(G[iV][j]);
                         Back.get(iV).add(G.gr_.get(iV).get(j));
-                        //sort(Back[iV].begin(), Back[iV].end()); //для поиска сортируем
+
+                     // Запоминаем порядок включения обратных ребер
+                        Order.get(Numeration).add(iV);
+                        Order.get(Numeration).add(G.gr_.get(iV).get(j));
+                        Order.get(Numeration).add(2);    // тип ребра: '2' == обратное
+                        incNumeration();
                     }
                 }
             }
             else
             {
-                //Sons[iV].push_back(graph[iV][j]);
-              //  DFS[iV].push_back(G[iV][j]); // строим вершину DFS дерева
                 DFS.get(iV).add(G.gr_.get(iV).get(j));
 
-                //iV = graph[iV][j];
-                //NumVert.add(G.gr_.get(iV).get(j), ++Number);
+             // Запоминаем порядок включения прямых ребер
+                //System.out.println("***Размерность = (" + Order.capacity() + ", " + Order.get(0).capacity() + ")***");
+                Order.get(Numeration).add(0, iV);
+                Order.get(Numeration).add(1, G.gr_.get(iV).get(j));
+                Order.get(Numeration).add(2, 1);    // тип ребра: '1' == прямое
+                incNumeration();
+
+                //System.out.print("\n Последний элемент:" + );
                 NumVert.setElementAt(++Number,G.gr_.get(iV).get(j));
-                //NumVert[G[iV][j]] = ++Number; // проверить ++
-
-                //P[G[iV][j]].push_back(G[iV][j]); //сразу без дерева можно только вставить себя самого
                 P.get(G.gr_.get(iV).get(j)).add(G.gr_.get(iV).get(j));
-
-                //unsearched.erase(remove(unsearched.begin(), unsearched.end(), graph[iV][j]), unsearched.end());
-               // unsearched[G[iV][j]] = -1;
                 unsearched.setElementAt(-1,G.gr_.get(iV).get(j));
-                //searched.push_back(graph[iV][j]);
-              //  searched[G[iV][j]] = G[iV][j];
                 searched.setElementAt(G.gr_.get(iV).get(j),G.gr_.get(iV).get(j));
-
-                DFS_pre(G, unsearched, searched, G.gr_.get(iV).get(j), Number,NumVert,DFS,Back,P); // рекурсия
+                Number = DFS_pre(G, unsearched, searched, G.gr_.get(iV).get(j), Number,NumVert,DFS,Back,P, Order); // рекурсия
 
             }
 
 
         }
-
-
+        return Number;
     }
 
     boolean back_check(Vector<Vector<Integer>> DFS, int vertex1, int vertex2, boolean check, int step_, Vector<Integer> watched)
@@ -229,18 +257,16 @@ public class Algorithm {
             }
             else
             {
-                //if (!binary_search(watched.begin(), watched.end(), j))
-                if (watched.get(j) == j)
+                if (watched.get(j).equals(j))
                 {
-                    //watched.push_back(j);
                     watched.setElementAt(j,j);
-                    //sort(watched.begin(), watched.end());
                     back_check(DFS, j, vertex2, check, ++step_, watched); // проверяем дальше
                 }
                 //иначе продолжаем цикл
             }
         }
-        return false; //ЭТОГО НЕ БЫЛО !!!
+        return true;
+
 
     }
 
@@ -257,8 +283,6 @@ public class Algorithm {
         {
             System.out.print(j + "-я вершина: ");
             System.out.println(NumVert.get(j) + " ");//опять махинации с пробелом!!
-            //cout << j << "-я вершина: ";
-           // cout << NumVert[j] << ' ' << endl;
         }
         System.out.println(" ");
     }
@@ -305,8 +329,6 @@ public class Algorithm {
         for (int j = 0; j < DFS.get(iV).size(); j++)
         {
             //cout << "Тек вершина " << iV << ", тек номер j " << j << endl;
-
-           // if (DFS[DFS[iV][j]].size() != 0) // если есть древесные ребра из следующей вершины //перемены
             if(DFS.get(DFS.get(iV).get(j)).size() != 0)
             {
 
@@ -317,15 +339,12 @@ public class Algorithm {
             for (int z = 0; z < Back.get(DFS.get(iV).get(j)).size(); z++)
             {
                  // если ведущее обратное ребро попало а просмотренную вершину, вершина в p(v)
-               // if (watch[Back[DFS[iV][j]][z]] == Back[DFS[iV][j]][z])
                 if(watch.get(Back.get(DFS.get(iV).get(j)).get(z)) ==  Back.get(DFS.get(iV).get(j)).get(z)) //equals все дела
                 {
-                    //if (!binary_search(P[FOR_RECORD].begin(), P[FOR_RECORD].end(), Back[DFS[iV][j]][z]))
                     if (!(P.get(FOR_RECORD).contains(Back.get(DFS.get(iV).get(j)).get(z))))
                     {
-                        //P[FOR_RECORD].push_back(Back[DFS[iV][j]][z]); //запихать вершину в которую можно попасть таким способом
+ //запихать вершину в которую можно попасть таким способом
                         P.get(FOR_RECORD).add(Back.get(DFS.get(iV).get(j)).get(z));
-                       // sort(P[FOR_RECORD].begin(), P[FOR_RECORD].end());
                         Collections.sort(P.get(FOR_RECORD));
                     }
 
@@ -339,13 +358,10 @@ public class Algorithm {
         {
             for (int z = 0; z < Back.get(FOR_RECORD).size(); z++)
             {
-                //if (binary_search(watch.begin(), watch.end(), Back[FOR_RECORD][z])) // если ведущее обратное ребро попало а просмотренную вершину, вершина в p(v)
                 if (watch.get(Back.get(FOR_RECORD).get(z)) == Back.get(FOR_RECORD).get(z)) //equals
                 {
-                    //if (!binary_search(P[FOR_RECORD].begin(), P[FOR_RECORD].end(), Back[FOR_RECORD][z]))  // проверить ТУТ
                     if(!(P.get(FOR_RECORD).contains(Back.get(FOR_RECORD).get(z))))
                     {
-                       // P[FOR_RECORD].push_back(Back[FOR_RECORD][z]); //запихать вершину в которую можно попасть таким способом
                         P.get(FOR_RECORD).add(Back.get(FOR_RECORD).get(z));
                     }
 
