@@ -71,8 +71,8 @@
             </TextArea>
             <VBox prefHeight="152.0" prefWidth="208.99993896484375" HBox.margin="$x2">
               <children>
-                <Button fx:id="Next_step" blendMode="SCREEN" defaultButton="false" font="$x1" mnemonicParsing="false" prefHeight="30.0" prefWidth="146.0" text="Следующий шаг" textFill="BLACK" />
-                <Button fx:id="Prev_step" blendMode="SCREEN" defaultButton="false" font="$x1" mnemonicParsing="false" prefHeight="30.0" prefWidth="146.00009999999747" text="Предыдущий шаг" textFill="BLACK" wrapText="false">
+                <Button fx:id="Next_step" blendMode="SCREEN" defaultButton="false" font="$x1" mnemonicParsing="false" onAction="#incCounter" prefHeight="30.0" prefWidth="146.0" text="Следующий шаг" textFill="BLACK" />
+                <Button fx:id="Prev_step" blendMode="SCREEN" defaultButton="false" font="$x1" mnemonicParsing="false" onAction="#decCounter" prefHeight="30.0" prefWidth="146.00009999999747" text="Предыдущий шаг" textFill="BLACK" wrapText="false">
                   <VBox.margin>
                     <Insets top="20.0" />
                   </VBox.margin>

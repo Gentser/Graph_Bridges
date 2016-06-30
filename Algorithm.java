@@ -14,10 +14,14 @@ public class Algorithm {
      Vector<Vector<Integer>> DFS ;//= new Vector<>(G.V);
      Vector<Vector<Integer>> Back ;//= new Vector<>(G.V); // обратные ребра
 
-     Vector<Vector<Integer>> Order; // массив, в котором указывается порядок включения ребер в Обратные/Прямые ребра
+    public Vector<Vector<Integer>> Order; // массив, в котором указывается порядок включения ребер в Обратные/Прямые ребра
     public int Numeration;      // для нумерации ребер в предыдущем массиве
 
     private void incNumeration() { Numeration++;}
+
+    public Vector<Vector<Integer>> getOrder() {
+        return Order;
+    }
 
     public void DFS_bridge(graph G)
     {
@@ -182,6 +186,7 @@ public class Algorithm {
             System.out.println("\n(" + Order.get(i).get(0) + ", " +
                      Order.get(i).get(1) + ", " + Order.get(i).get(2) + ") ");
         }
+
     }
 
 

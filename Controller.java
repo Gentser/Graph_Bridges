@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
 
 
@@ -40,11 +41,23 @@ public class Controller {
     private GridPane Main_stage;
     @FXML
     private Pane Pane1;
+    @FXML
+    private Button Next_step;
+    @FXML
+    private Button Prev_step;
+
+    private ArrayList<Circle> CircArr;// = new ArrayList<>();
+    private ArrayList<Label> LabArr;// = new ArrayList<>();
+    private ArrayList<Line> LinArr;// = new ArrayList<>();
     /**
      * Граф
      */
     private graph G;
     private Algorithm alg;
+
+    private int counter = -1;
+
+
 
     //....
     /*Controller(){
@@ -71,22 +84,14 @@ public class Controller {
                  // Отработка алгоритма
                     alg = new Algorithm();
                     alg.DFS_bridge(G);
-//                    Messeges.appendText("\n Порядок добавления ребер:");
-//                    for (int i = 0; i < 2*G.E; i++)
-//                    {
-//                        Messeges.appendText("\n(" + alg.Order.get(i).get(0) + ", " +
-//                                alg.Order.get(i).get(1) + ", " + alg.Order.get(i).get(2) + ") ");
-//                    }
+
+                    Prev_step.setDisable(true);
+
                 }
             } catch (NumberFormatException ex) {
                 ex.printStackTrace();
                 error("Ошибка ввода.");
             }
-
-       /* Algorithm T = new Algorithm();
-        T.DFS_bridge(LOL);*/
-
-
 
     }
 
@@ -96,10 +101,9 @@ public class Controller {
      * @param R - круг, на котором будут располагаться вершины графа
      */
     public void paint_GRAPH ( graph G, Circle R){
-        ArrayList<Circle> CircArr = new ArrayList<>();
-        ArrayList<Label> LabArr = new ArrayList<>();
-
-        ArrayList<Line> LinArr = new ArrayList<>();
+        CircArr = new ArrayList<>(); //точки
+        LabArr = new ArrayList<>(); //лейблы
+        LinArr = new ArrayList<>(); // линии
 
     // Отрисовка вершин графа
         double x1,y1;
@@ -128,6 +132,83 @@ public class Controller {
         }
     }
 
+    public void showRibs(int counter , Algorithm alg) // должен измениться каунтер
+    {
+/*        for(int i = 0; i < counter; i++)
+        {*/
+        //counter++;
+            for(int j = 0; j < LinArr.size(); j++)
+            {
+                if (( LinArr.get(j).getStartX() == CircArr.get(alg.getOrder().get(counter).get(0)).getCenterX() ) &&
+                        (LinArr.get(j).getStartY() == CircArr.get(alg.getOrder().get(counter).get(0)).getCenterY()) &&
+                (LinArr.get(j).getEndX() == CircArr.get(alg.getOrder().get(counter).get(1)).getCenterX()) &&
+                        (LinArr.get(j).getEndY() == CircArr.get(alg.getOrder().get(counter).get(1)).getCenterY()))
+                {
+                    if (alg.getOrder().get(counter).get(2) == 1)
+                    {
+                        LinArr.get(j).setFill(Color.GREEN); //прямое
+                    }
+                    else if (alg.getOrder().get(counter).get(2) == 1)
+                    {
+                        LinArr.get(j).setFill(Color.INDIGO); //обратное
+                    }
+                    else
+                    {
+                        LinArr.get(j).setFill(Color.PEACHPUFF); //мостик
+                    }
+                }
+
+            }
+
+        //прячем предыдущее ребро
+    }
+
+    public void hideRibs (int counter, Algorithm alg) {
+        //counter--;
+        for(int j = 0; j < LinArr.size(); j++)
+        {
+            if (( LinArr.get(j).getStartX() == CircArr.get(alg.getOrder().get(counter).get(0)).getCenterX() ) &&
+                    (LinArr.get(j).getStartY() == CircArr.get(alg.getOrder().get(counter).get(0)).getCenterY()) &&
+                    (LinArr.get(j).getEndX() == CircArr.get(alg.getOrder().get(counter).get(1)).getCenterX()) &&
+                    (LinArr.get(j).getEndY() == CircArr.get(alg.getOrder().get(counter).get(1)).getCenterY()))
+            {
+                LinArr.get(j).setFill(Color.BLACK); //тип закарсили азазазазазз
+            }
+        }
+    }
+
+    public void incCounter() {
+        if (alg.Numeration > counter + 1)
+        {
+            if (Prev_step.isDisable())
+            {
+                Prev_step.setDisable(false);
+            }
+            counter ++;
+            showRibs(counter, alg);
+        }
+        else
+        {
+            Next_step.setDisable(true);
+        }
+    }
+
+    public void decCounter() {
+        if (counter > 0){
+            if(Next_step.isDisable())
+            {
+                Next_step.setDisable(false);
+            }
+
+            hideRibs(counter, alg);
+            counter --;
+        }
+        else
+        {
+            Prev_step.setDisable(true);
+        }
+    }
+
 
 
 
@@ -141,5 +222,7 @@ public class Controller {
 
 
 }
+
+
 
 
