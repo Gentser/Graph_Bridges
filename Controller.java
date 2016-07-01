@@ -47,6 +47,8 @@ public class Controller {
     private Button Prev_step;
     @FXML
     private Slider PIMPSlide;
+    @FXML
+    private ImageView pahom;
 
     private ArrayList<Circle> CircArr;// = new ArrayList<>();
     private ArrayList<Label> LabArr;// = new ArrayList<>();
@@ -61,6 +63,14 @@ public class Controller {
     private int counter = -1;
     private static int INDEX = 0;
 
+   public void Change_fon ()
+    {
+        if(!pahom.isVisible())
+        {
+            pahom.setVisible(true);
+        }
+        else  pahom.setVisible(false);
+    }
 
     public void Generation_kek() {
             try {
