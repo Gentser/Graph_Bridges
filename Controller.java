@@ -4,26 +4,23 @@ package sample;
  * Created by ДРЮС on 27.06.2016.
  */
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.canvas.Canvas;
+
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+
 
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.Scene;
 
-import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Vector;
+import javafx.scene.media.*;
+import java.io.*;
+
 
 
 //import java.
@@ -61,6 +58,10 @@ public class Controller {
      */
     private graph G;
     private Algorithm alg;
+    private Media mainSong;     // звуковая дорожка0
+    private Media song1;        // звуковая дорожка1
+    private MediaPlayer mediaPlayer1;    // плеер для главной песни
+    private MediaPlayer mediaPlayer2;    // плеер
 
     private int counter = -1;
     private static int INDEX = 0;
@@ -70,8 +71,20 @@ public class Controller {
         if(!pahom.isVisible())
         {
             pahom.setVisible(true);
+            mediaPlayer1.pause();
+
+            mediaPlayer2 = new MediaPlayer(song1);
+            mediaPlayer2.setVolume(0.3);
+            mediaPlayer2.setCycleCount(3);
+            mediaPlayer2.play();
+
         }
-        else  pahom.setVisible(false);
+        else
+        {
+            pahom.setVisible(false);
+            mediaPlayer1.play();
+            mediaPlayer2.stop();
+        }
     }
 
     public void Generation_kek() {
@@ -145,6 +158,14 @@ public class Controller {
 
                     Prev_step.setDisable(true);
 
+                    // Песни
+                    mainSong = new Media(new File("src/sample/mainsong.wav").toURI().toString());
+                    song1 = new Media(new File("src/sample/song1.wav").toURI().toString());
+                    mediaPlayer1 = new MediaPlayer(mainSong);
+                    mediaPlayer1.setMute(false);
+                    mediaPlayer1.setVolume(0.3);
+                    mediaPlayer1.setCycleCount(3);
+                    mediaPlayer1.play();
                 }
             } catch (NumberFormatException ex) {
                 ex.printStackTrace();
