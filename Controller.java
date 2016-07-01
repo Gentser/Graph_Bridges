@@ -49,6 +49,8 @@ public class Controller {
     private Slider PIMPSlide;
     @FXML
     private ImageView pahom;
+    @FXML
+    private ImageView tarelka;
 
     private ArrayList<Circle> CircArr;// = new ArrayList<>();
     private ArrayList<Label> LabArr;// = new ArrayList<>();
@@ -352,8 +354,21 @@ public class Controller {
         alert.showAndWait();
     }
 
+    public void bread ()
+    {
+        //tarelka.setVisible(true);
+        tarelka.setOpacity(1);
+    }
+
+    public void unbread ()
+    {
+        //tarelka.setVisible(true);
+        tarelka.setOpacity(0);
+    }
+
 
 }
+
 
 
 

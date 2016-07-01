@@ -17,7 +17,7 @@
 
 <GridPane fx:id="Main_stage" alignment="CENTER" blendMode="SRC_OVER" hgap="10.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1200.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
   <children>
-    <ImageView id="fon5" fx:id="Fon_1" fitHeight="1000.0" fitWidth="1500.0" onMouseMoved="#Change_fon" pickOnBounds="true" visible="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+    <ImageView id="fon5" fx:id="Fon_1" fitHeight="1020.0" fitWidth="1980.0" onMouseMoved="#Change_fon" pickOnBounds="true" visible="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <image>
         <Image url="@fon5.png" preserveRatio="true" smooth="true" />
       </image>
@@ -126,7 +126,7 @@
                     <Insets top="100.0" />
                   </VBox.margin>
                 </Label>
-                <ImageView id="tar" fx:id="tarelka" fitHeight="28.0001220703125" fitWidth="73.0" onMouseClicked="#Change_fon" pickOnBounds="true" VBox.margin="$x3">
+                <ImageView id="tar" fx:id="tarelka" fitHeight="28.0001220703125" fitWidth="73.0" onMouseClicked="#Change_fon" onMouseDragged="#bread" onMouseEntered="#bread" onMouseExited="#unbread" opacity="0.0" pickOnBounds="true" visible="true" VBox.margin="$x3">
                   <image>
                     <Image url="@tar.png" preserveRatio="true" smooth="true" />
                   </image>
