@@ -121,7 +121,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
               <children>
-                <Label text="Сладкий хлеб" textFill="#cc9300">
+                <Label fx:id="sugar" onMouseDragged="#bread" onMouseEntered="#bread" onMouseExited="#unbread" opacity="0.0" text="Сладкий хлеб" textFill="#cc9300">
                   <VBox.margin>
                     <Insets top="100.0" />
                   </VBox.margin>

@@ -48,6 +48,8 @@ public class Controller {
     private ImageView pahom;
     @FXML
     private ImageView tarelka;
+    @FXML
+    private Label sugar;
 
     private ArrayList<Circle> CircArr;// = new ArrayList<>();
     private ArrayList<Label> LabArr;// = new ArrayList<>();
@@ -102,7 +104,7 @@ public class Controller {
                 {
                     EGG("Графа нет! Но вы держитесь тут, всего вам доброго и хорошего настроения!");
                 }
-               else if (x > 10 || x < 2) {
+               else if (x > 100 || x < 2) {
                     error("Выход за пределы дозволенного.");
                 } else {
                     G = new graph(x);
@@ -164,7 +166,7 @@ public class Controller {
                     mediaPlayer1 = new MediaPlayer(mainSong);
                     mediaPlayer1.setMute(false);
                     mediaPlayer1.setVolume(0.3);
-                    mediaPlayer1.setCycleCount(3);
+                    //mediaPlayer1.setCycleCount(3);
                     mediaPlayer1.play();
                 }
             } catch (NumberFormatException ex) {
@@ -378,12 +380,14 @@ public class Controller {
     public void bread ()
     {
         //tarelka.setVisible(true);
+        sugar.setOpacity(1);
         tarelka.setOpacity(1);
     }
 
     public void unbread ()
     {
         //tarelka.setVisible(true);
+        sugar.setOpacity(0);
         tarelka.setOpacity(0);
     }
 
